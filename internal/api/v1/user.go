@@ -234,7 +234,6 @@ func (self *UserV1API) login(c *gin.Context) {
 		c.JSON(http.StatusOK, fail(userErrLoginFail, err.Error()))
 		return
 	}
-	//返回用户哪些数据
 	response := userLoginSuccessResponse{}
 	response.Id = user.Id
 	if user.Sex == 0 {

@@ -38,7 +38,7 @@ func AddFriend(friend *Friend) (int64, error) {
 	if friend.Fnick == "" {
 		return sqlErrorFriendQFnickInvalid, errors.New("fnick is invalid")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return sqlErrorFriendOpenDbFail, err
 	}
@@ -78,7 +78,7 @@ func DeleteFriendById(id int64) error {
 	if id < 1 {
 		return errors.New("id is invalid")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return err
 	}
@@ -117,7 +117,7 @@ func DeleteFriend(friend *Friend) error {
 	if friend.Fid < 1 {
 		return errors.New("fid is invalid")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return err
 	}
@@ -152,7 +152,7 @@ func UpdateFriendNickBy(id int64, newNick string) error {
 	if id < 1 {
 		return  errors.New("id is invalid")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return err
 	}
@@ -195,7 +195,7 @@ func UpdateFriendNick(friend *Friend) error {
 	if friend.Fnick == "" {
 		return errors.New("fnick is empty")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return err
 	}
@@ -231,7 +231,7 @@ func GetFriendsByUid(uid int64) ([]*Friend, error) {
 	if uid < 1 {
 		return nil, errors.New("uid is invalid")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return nil, err
 	}

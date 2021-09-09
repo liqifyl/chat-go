@@ -28,7 +28,7 @@ func QueryUserById(id int64) ([]*ChatUser, error) {
 	if id < 1 {
 		return nil, errors.New("id must be greater than 0")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ func InsertUser(user *ChatUser) (int64, error) {
 		user.Birthday = t.Format("2006-01-02 15:04:05")
 	}
 	rtime := util.CurrentTimeStr("2006-01-02 15:04:05")
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return 0, err
 	}
@@ -155,7 +155,7 @@ func UpdateUserPwd(user *ChatUser, newPwd string) error {
 	if len(newPwd) == 0 {
 		return errors.New("new password is empty")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return err
 	}
@@ -204,7 +204,7 @@ func UpdateUserNick(user *ChatUser, newNick string) error {
 	if newNick == "" {
 		return errors.New("new nick is empty")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return err
 	}
@@ -252,7 +252,7 @@ func UpdateUserSign(user *ChatUser, newSign string) error {
 	if len(newSign) == 0 {
 		return errors.New("new self sign is empty")
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return err
 	}
@@ -303,7 +303,7 @@ func UpdateUserBirthday(user *ChatUser, newBirthday string) error {
 	if err != nil {
 		return err
 	}
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return err
 	}
@@ -341,7 +341,7 @@ func UpdateUserBirthday(user *ChatUser, newBirthday string) error {
 
 //查看用户签名
 func GetUserSignById(id int64) (string, error) {
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return "", err
 	}
@@ -363,7 +363,7 @@ func GetUserSignById(id int64) (string, error) {
 
 //获得用户nick
 func GetUserNick(id int64) (string, error) {
-	db, err := GetImDb()
+	db, err := getImDb()
 	if err != nil {
 		return "", err
 	}

@@ -8,8 +8,10 @@ import (
 )
 
 func main() {
-	ServerListenAddress.Host = "127.0.0.1:8080"
+	ServerListenAddress.Host = "127.0.0.1:9092"
 	LogToGraylogAddress.Host = "47.107.231.119:22000"
+	RedisServerAddress.Host = "localhost:6379"
+	MysqlChatDataSourceName = "root:liqifyl10051113@tcp(127.0.0.1:3306)/im"
 	ginConfig := config.GinServerConfig{}
 	ginConfig.TestUid = TestUid
 	ginConfig.UserImageSaveDir = UserImageSaveDir
@@ -21,7 +23,6 @@ func main() {
 		os.Exit(-1)
 	}
 	zap.L().Debug("starting")
-	zap.L().Info("chat-test")
 	gin.StartGinServer(ginConfig)
 	zap.L().Debug("exited")
 	TermLog()

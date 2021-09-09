@@ -2,26 +2,43 @@ package sql
 
 import (
 	"database/sql"
+	"fmt"
 	"sync"
 )
 
 var (
-	imDb     *sql.DB = nil
-	imDbLock         = new(sync.Mutex)
+	imDbLock        = new(sync.Mutex)
+	imDbMap         = make(map[string]*sql.DB)
+	DefaultDbConfig = DbConfig{}
 )
 
-func GetImDb() (*sql.DB, error) {
+type DbConfig struct {
+	DriveName      string
+	DataSourceName string
+}
+
+func convertDbConfigToStr(config DbConfig) string {
+	str := fmt.Sprintf("%s-%s", config.DriveName, config.DataSourceName)
+	return str
+}
+
+func getImDb() (*sql.DB, error) {
+	return getImDbByConfig(DefaultDbConfig)
+}
+
+func getImDbByConfig(config DbConfig) (*sql.DB, error) {
 	defer imDbLock.Unlock()
 	imDbLock.Lock()
-	if imDb == nil {
-		db, err := sql.Open("mysql", "root:liqifyl10051113@tcp(127.0.0.1:3306)/im")
+	key := convertDbConfigToStr(config)
+	db := imDbMap[key]
+	if db == nil {
+		db, err := sql.Open(config.DriveName, config.DataSourceName)
 		if err != nil {
 			return nil, err
 		}
 		//db.SetConnMaxLifetime(time.Minute * 3)
 		db.SetMaxOpenConns(10)
 		db.SetMaxIdleConns(10)
-		imDb = db
 	}
-	return imDb, nil
+	return db, nil
 }
