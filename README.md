@@ -3,10 +3,12 @@
 # 准备工作
 
 ## mysql准备工作
+
+### 创建数据库
 ```sql
 CREATE DATABASE xx;
 ```
-## 创建表
+### 创建表
 ```sql
 //用户表
 create table user(
@@ -50,9 +52,9 @@ create table friend_circle (
 请参考[graylog单机搭建](https://cloud.tencent.com/developer/article/1628850)进行部署
 ### 在部署中注意事项
 1.由于elasticsearch无法以root模式运行，所以需要创建elasticesearch组和用户运行elasticsearch;第二种方式就是以root方式运行并且将elasticsearch运行时需要用到的文件夹全部chown -R到
-elasticsearch:elasticsearch
-2.如果需要将graylog web需要以公网方式输出，请修改/etc/graylog/server/server.conf中的http_publish_uri参数，将其配置外网web地址
-3.如何开启gelf udp监听端口，通过graylog web页面system->inputs->gelf udp启动
+elasticsearch:elasticsearch<br/>
+2.如果需要将graylog web需要以公网方式输出，请修改/etc/graylog/server/server.conf中的http_publish_uri参数，将其配置外网web地址<br/>
+3.如何开启gelf udp监听端口，通过graylog web页面system->inputs->gelf udp启动<br/>
 
 # 编译输出bin
 
