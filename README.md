@@ -56,5 +56,20 @@ elasticsearch:elasticsearch<br/>
 2.如果需要将graylog web需要以公网方式输出，请修改/etc/graylog/server/server.conf中的http_publish_uri参数，将其配置外网web地址<br/>
 3.如何开启gelf udp监听端口，通过graylog web页面system->inputs->gelf udp启动<br/>
 
+## go开发环境配置
+* 使用golang 1.16版本
+* go env -w GOPATH=/Users/xx, 配置GOPATH,如果不配置可能在编译阶段出问题
+* go env -w GO111MODULE=on，开启GO111MODULE
+
 # 编译输出bin
+
+## 编译时获取版本号
+ ```bash
+    go install -ldflags "-X main.BuildVersion=`git describe --long --dirty`" $chat-go/cmd/chat-server/...
+ ```
+ 
+ ## 不带版本号
+ ```bash
+    go install $chat-go/cmd/chat-server/...
+ ```
 
